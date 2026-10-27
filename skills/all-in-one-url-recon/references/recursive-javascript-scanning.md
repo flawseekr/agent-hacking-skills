@@ -39,11 +39,25 @@ Validate each candidate using its response and content. Do not assume a URL is a
 
 ### Manifest Discovery
 
-Identify and collect available build manifests and resource mapping files associated with Vite, Webpack, Next.js, and other relevant frameworks.
+Identify and collect publicly accessible manifests, asset mappings, configuration files, and framework-generated metadata that may provide useful information for application reconnaissance.
 
-Discover manifests through HTML, runtime network traffic, application configuration, and public references.
+Discover resources through HTML references, runtime network traffic, application configuration, public references, and manual path checking. Include, but do not limit discovery to, the following filenames and paths:
 
-Collect and record verified manifests without analyzing their contents.
+- **Web manifests and source maps:** `manifest.json`, `manifest.webmanifest`, `site.webmanifest`, `*.js.map`, browser extension `manifest.json` (MV2/MV3).
+- **`.well-known/` resources:** `.well-known/assetlinks.json`, `.well-known/apple-app-site-association`, `.well-known/openid-configuration`, `.well-known/oauth-authorization-server`, `.well-known/gpc.json`, `.well-known/nodeinfo`, `.well-known/security.txt`, `.well-known/mta-sts.txt`, `.well-known/dnt-policy.txt`, `.well-known/change-password`, `.well-known/ai-plugin.json`.
+- **Vite:** `.vite/manifest.json`, `.vite/ssr-manifest.json`.
+- **Webpack and Create React App:** `asset-manifest.json`, `manifest.json`, `precache-manifest.<hash>.js`, `webpack-stats.json`, `stats.json`.
+- **Workbox and service workers:** `sw.js`, `service-worker.js`, `workbox-<hash>.js`, `firebase-messaging-sw.js`.
+- **Angular:** `ngsw.json`, `ngsw-worker.js`, `3rdpartylicenses.txt`.
+- **Nuxt:** `_nuxt/builds/meta/<uuid>.json`, `_nuxt/builds/latest.json`.
+- **Gatsby:** `webpack.stats.json`, `chunk-map.json`, `page-data/**/page-data.json`, `app-data.json`.
+- **Next.js:** `BUILD_ID`, `_buildManifest.js`, `_ssgManifest.js`, `routes-manifest.json`, `prerender-manifest.json`, `required-server-files.json`, `build/app-build-manifest.json`, `react-loadable-manifest.json`, `images-manifest.json`, `export-marker.json`, and `server/{pages,app-paths,middleware,next-font,functions-config,server-reference}-manifest.json`.
+- **API specifications and configuration:** `openapi.json`, `swagger.json`, `v3/api-docs`, `package.json`, `composer.json`, `bower.json`, `firebase.json`, `vercel.json`, `now.json`, `netlify.toml`, `tsconfig.json`, `.babelrc`, `appsettings.json`, `config.json`, `env.json`.
+- **Supporting XML and metadata:** `browserconfig.xml`, `opensearch.xml`.
+
+Use these names as a starting point, adapting paths and filename patterns to the detected framework and application structure. Include relevant version-specific and hashed filenames where applicable.
+
+Verify each discovered resource by inspecting its response and contents; do not assume a file is valid on its name or HTTP status alone.
 
 ### Recursive Resource Crawling
 
