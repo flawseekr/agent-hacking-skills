@@ -6,65 +6,57 @@ Perform comprehensive, recursive resource discovery across the target applicatio
 
 ### HTML Discovery
 
-Extract all resource references from the target application, including:
+Extract observable resource references from the target application, including:
 
-- External and inline JavaScript, module scripts, and dynamically loaded scripts.
-- HTML documents, linked pages, and embedded frames.
-- Static assets, including JSON, XML, and other application resources.
-- Resource URLs referenced in HTML attributes, inline code, and configuration data.
+- External, inline, module, and dynamically loaded JavaScript.
+- HTML documents, linked application pages, and embedded frames.
+- API endpoints and relevant JSON or XML resources.
+- Source maps, build manifests, and application configuration files.
+- Resource URLs referenced in HTML attributes, scripts, and configuration data.
 
-Do not restrict discovery to file extensions. Include resources identified through actual references, regardless of their URL suffix.
+Do not restrict discovery by file extension. Include resources identified through actual references, regardless of their URL suffix.
 
 ### Runtime Network Capture
 
 Use Playwright to record network requests and responses observed during browser execution.
 
 - Visit discovered application routes and explore interactive features that may trigger lazy loading or additional resource requests.
-- Capture scripts, stylesheets, API responses, documents, fonts, images, WebAssembly, and other relevant resources.
-- Record request URLs, methods, response status codes, content types, and relevant evidence.
+- Capture JavaScript, HTML documents, API requests, source maps, manifests, and relevant structured-data resources.
+- Record request URLs, methods, response status codes, content types, and supporting evidence.
 - Include resources loaded through redirects or dynamically generated URLs.
-- Avoid treating a requested URL as a valid resource until its response and DOM or content has been appropriately verified.
+- Verify resource content before classifying it. A request or HTTP status code alone does not establish validity.
 
 ### Source Map Discovery
 
-Discover accessible source maps and related debugging artifacts using:
+Discover accessible source maps using:
 
-- `.map` URLs referenced by scripts or stylesheets.
-- `sourceMappingURL` directives in JavaScript and CSS.
-- Source map references found in HTML, build output, or runtime network traffic.
-- Alternative URL patterns supported by observed application references.
+- `.map` URLs referenced by JavaScript.
+- `sourceMappingURL` directives in JavaScript files.
+- Source map references observed in HTML, build artifacts, or runtime network traffic.
+- Additional source map URLs established through actual references.
 
-Validate discovered resources and retain their evidence. Do not assume that a `.map` URL is a valid source map based on its extension alone.
+Validate each candidate using its response and content. Do not assume a URL is a valid source map based on its extension alone.
 
 ### Manifest Discovery
 
-Identify and collect available build manifests and resource mapping files for Vite, Webpack, Next.js, and other relevant frameworks.
+Identify and collect available build manifests and resource mapping files associated with Vite, Webpack, Next.js, and other relevant frameworks.
 
-Include manifests discovered through HTML, network traffic, configuration references, or publicly accessible build artifacts. Do not analyze their contents; only collect and record verified resources.
+Discover manifests through HTML, runtime network traffic, application configuration, and public references.
 
-### OSINT
-
-Search Google, GitHub, the Wayback Machine, and other relevant public sources for application resources that are not exposed through the current application interface.
-
-- Search for scripts, stylesheets, source maps, manifests, configuration files, API-related resources, and other relevant assets.
-- Validate each result by inspecting its actual response and content.
-- Exclude invalid results and deduplicate resources across discovery sources.
-- Preserve the source and evidence for each discovered resource.
-- Do not classify a resource based solely on its filename, extension, or search result snippet.
+Collect and record verified manifests without analyzing their contents.
 
 ### Recursive Resource Crawling
 
-Recursively inspect discovered resources for additional resource references, regardless of file extension.
+Recursively inspect discovered resources for additional observable resource references, regardless of file extension.
 
 - Extract references from JavaScript imports, dynamic `import()`, module dependencies, chunk mappings, and runtime loaders.
-- Extract references from CSS `@import` and `url()` declarations.
-- Inspect HTML links, frames, embedded resources, and relevant configuration or data files for further resource URLs.
-- Follow references found in source maps and build artifacts when they reveal additional resources.
-- Add newly discovered resources to the crawling queue, including resources served from extensionless or dynamically generated URLs.
-- Validate each resource and deduplicate by normalized URL while preserving relevant request methods and discovery evidence.
-- Continue processing the queue until no new resources are discovered.
+- Inspect HTML links, embedded frames, scripts, and relevant configuration or structured-data resources.
+- Follow source map and build-manifest references to discover additional resources.
+- Add newly discovered resources to the crawling queue, including extensionless and dynamically generated URLs.
+- Validate resources and deduplicate by normalized URL while preserving relevant HTTP methods and discovery evidence.
+- Continue processing the queue sequentially until no new resources are discovered.
 
-Do not assume every referenced URL is a source file or valid resource. Confirm its type using observed responses and content.
+**Main rule:** Do not include CSS, images, fonts, or other purely visual assets in the output. Do not assume a referenced URL is valid or belongs to a particular resource type without supporting evidence.
 
 ## Output
 
