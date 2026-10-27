@@ -75,7 +75,7 @@ For non-GET requests, populate the required headers and request body based on th
 
 {"url":"https://sub.example.com/manifest.json","method":"GET","status_code":200,"response_content_type":"application/json","resource_type":"FILE","validation_method":"GET_ONLY","request":{"headers":{"User-Agent":"Mozilla/5.0"}},"evidence":{"raw_response":"String"},"valid":true}
 
-{"url":"https://sub.example.com/hello","method":"GET","status_code":200,"response_content_type":"application/json","resource_type":"PAGE","validation_method":"GET_ONLY","request":{"headers":{"User-Agent":"Mozilla/5.0"}},"evidence":{"raw_response":"String"},"valid":true}
+{"url":"https://sub.example.com/hello","method":"GET","status_code":200,"response_content_type":"text/html","resource_type":"PAGE","validation_method":"GET_ONLY","request":{"headers":{"User-Agent":"Mozilla/5.0"}},"evidence":{"raw_response":"String"},"valid":true}
 
 {"url":"https://sub.example.com/api/form","method":"POST","status_code":200,"response_content_type":"application/json","resource_type":"API","validation_method":"HTTP_REQUEST","request":{"headers":{"User-Agent":"Mozilla/5.0"},"body":{}},"evidence":{"raw_response":"String"},"valid":true}
 ```
