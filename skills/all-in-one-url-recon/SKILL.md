@@ -9,13 +9,23 @@ Perform comprehensive URL reconnaissance to discover, collect, and validate URLs
 
 ## Workflow
 
-1. Perform URL and endpoint reconnaissance by following the applicable guides in the skill's `references/` directory.
+Read the `Output` section to understand the objective.
 
-2. Research relevant techniques online to identify additional references and guidance.
+1. Perform URL and endpoint discovery (reconnaissance) using any relevant methods necessary.
 
-3. If additional references are found, create separate documents in the working project directory, outside the skill's `references/` directory, following the **Additional Reference Guide**.
+2. If references are needed, always check the skill's `references/` directory.
 
-4. Perform reconnaissance sequentially in a continuous loop. Do not prioritize or rank URLs. Execute each action, observe the actual results, and use the observed evidence to determine the next action. Do not rely on assumptions or reasoning in place of execution. Produce the final output only from actions performed and results directly observed.
+3. Research relevant techniques online to identify additional references and guidance.
+
+4. If additional references are found, create separate documents in the working project directory, outside the skill's `references/` directory, following the Additional Reference Guide.
+
+5. Perform reconnaissance sequentially in a continuous loop. Do not prioritize or rank URLs. Execute each action, observe the actual results, and use the collected evidence. Do not substitute assumptions or theoretical reasoning for actual execution. Base the final output exclusively on actions performed and results directly observed.
+
+6. Work systematically and sequentially rather than in parallel. Coverage is more important than speed.
+
+7. Once the URL and endpoint list has been collected, strictly validate each entry. Do not rely solely on HTTP status codes to determine whether a URL or endpoint is valid. Inspect the actual response content, headers, and behavior where relevant.
+
+8. Clean up temporary files and unnecessary output. Keep only `FINDINGS.md`, output files, and relevant artifacts.
 
 ## Additional Reference Guide
 
