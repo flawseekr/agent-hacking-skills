@@ -11,7 +11,7 @@ Perform duckduckgo dorking operation using a real browser through Playwright, MC
 
 ## Temporary Output
 
-Save to `duckduckgo-output.txt`
+Save the temporary results to `duckduckgo-output.txt`, containing one URL per line.
 
 ```
 https://example.com
