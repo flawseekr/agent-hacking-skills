@@ -26,17 +26,6 @@ Use Playwright to record network requests and responses observed during browser 
 - Include resources loaded through redirects or dynamically generated URLs.
 - Verify resource content before classifying it. A request or HTTP status code alone does not establish validity.
 
-### Source Map Discovery
-
-Discover accessible source maps using:
-
-- `.map` URLs referenced by JavaScript.
-- `sourceMappingURL` directives in JavaScript files.
-- Source map references observed in HTML, build artifacts, or runtime network traffic.
-- Additional source map URLs established through actual references.
-
-Validate each candidate using its response and content. Do not assume a URL is a valid source map based on its extension alone.
-
 ### Manifest Discovery
 
 Identify and collect publicly accessible manifests, asset mappings, configuration files, and framework-generated metadata that may provide useful information for application reconnaissance.
@@ -58,6 +47,17 @@ Discover resources through HTML references, runtime network traffic, application
 Use these names as a starting point, adapting paths and filename patterns to the detected framework and application structure. Include relevant version-specific and hashed filenames where applicable.
 
 Verify each discovered resource by inspecting its response and contents; do not assume a file is valid on its name or HTTP status alone.
+
+### Source Map Discovery
+
+Discover accessible source maps using:
+
+- `.map` URLs referenced by JavaScript.
+- `sourceMappingURL` directives in JavaScript files.
+- Source map references observed in HTML, build artifacts, or runtime network traffic.
+- Additional source map URLs established through actual references.
+
+Validate each candidate using its response and content. Do not assume a URL is a valid source map based on its extension alone.
 
 ### Recursive Resource Crawling
 
