@@ -71,12 +71,17 @@ For non-GET requests, populate the required headers and request body based on th
 - Set valid to true only when the resource has been verified using appropriate evidence. An HTTP status code of 200 alone is insufficient.
 
 ```json
-{"url":"https://sub.example.com","method":"GET","status_code":200,"response_content_type":"text/html","resource_type":"SPA","validation_method":"DOM_OBSERVATION","request":{"headers":{"User-Agent":"Mozilla/5.0"}},"evidence":{"raw_response":"String","dom_observation":"String"},"valid":true}
+{"url":"https://sub.example.com/dashboard","method":"GET","status_code":200,"response_content_type":"text/html","resource_type":"DIFFERENT-SPA","validation_method":"DOM_OBSERVATION","request":{"headers":{"User-Agent":"Mozilla/5.0"}},"evidence":{"raw_response":"String","dom_observation":"String"},"valid":true}
 
 {"url":"https://sub.example.com/manifest.json","method":"GET","status_code":200,"response_content_type":"application/json","resource_type":"FILE","validation_method":"GET_ONLY","request":{"headers":{"User-Agent":"Mozilla/5.0"}},"evidence":{"raw_response":"String"},"valid":true}
+
+{"url":"https://sub.example.com/hello","method":"GET","status_code":200,"response_content_type":"application/json","resource_type":"PAGE","validation_method":"GET_ONLY","request":{"headers":{"User-Agent":"Mozilla/5.0"}},"evidence":{"raw_response":"String"},"valid":true}
 
 {"url":"https://sub.example.com/api/form","method":"POST","status_code":200,"response_content_type":"application/json","resource_type":"API","validation_method":"HTTP_REQUEST","request":{"headers":{"User-Agent":"Mozilla/5.0"},"body":{}},"evidence":{"raw_response":"String"},"valid":true}
 ```
 
+## Evidence Guard
 
+- There are four supported `resource_type` (values `DIFFERENT-SPA`, `PAGE`, `FILE`, and `API`. Use `DIFFERENT-SPA` only when DOM observation confirms that the resource is a distinct SPA experience.
 
+- There are exactly 3 supported validation_method (values: `DOM_OBSERVATION`, `GET_ONLY` and `HTTP_REQUEST`). Use only these values.
